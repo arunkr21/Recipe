@@ -79,7 +79,10 @@ export function getCategoryEmoji(category) {
 // Helper function for country flags
 export function getCountryFlag(country) {
   const emojiMap = {
+    Algerian: "🏜️",
     American: "🗽",
+    Argentinian: "⚽",
+    Australian: "🦘",
     British: "👑",
     Canadian: "🍁",
     Chinese: "🐉",
@@ -98,24 +101,21 @@ export function getCountryFlag(country) {
     Malaysian: "🌺",
     Mexican: "🌮",
     Moroccan: "🕌",
+    Norwegian: "❄️",
     Polish: "🦅",
     Portuguese: "🚢",
     Russian: "❄️",
+    "Saudi Arabian": "🕋",
+    Slovakian: "🏔️",
     Spanish: "💃",
+    Syrian: "🏛️",
     Thai: "🛕",
     Tunisian: "🏜️",
     Turkish: "🧿",
     Ukrainian: "🌻",
-    Vietnamese: "🍜",
-    Algerian: "🏜️",
-    Argentinian: "⚽",
-    Australian: "🦘",
-    Norwegian: "❄️",
-    "Saudi Arabian": "🕋",
-    Slovakian: "🏔️",
-    Syrian: "🏛️",
     Uruguayan: "⚽",
     Venezuelan: "🌞",
+    Vietnamese: "🍜",
   };
 
   return emojiMap[country] ?? "🌍";

@@ -2,6 +2,7 @@
 
 const MEALDB_BASE = "https://www.themealdb.com/api/json/v1/1";
 
+// Get random recipe of the day
 export async function getRecipeOfTheDay() {
   try {
     const response = await fetch(`${MEALDB_BASE}/random.php`, {
@@ -23,31 +24,33 @@ export async function getRecipeOfTheDay() {
   }
 }
 
-export async function getCatagories() {
+// Get all categories
+export async function getCategories() {
   try {
     const response = await fetch(`${MEALDB_BASE}/list.php?c=list`, {
-      next: { revalidate: 604800 }, // Cache for 7 days
+      next: { revalidate: 604800 }, // Cache for 1 week (categories rarely change)
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch catagories");
+      throw new Error("Failed to fetch categories");
     }
 
     const data = await response.json();
     return {
       success: true,
-      recipe: data.meals || [],
+      categories: data.meals || [],
     };
   } catch (error) {
-    console.error("Error fetching catagories:", error);
-    throw new Error(error.message || "Failed to load catagories");
+    console.error("Error fetching categories:", error);
+    throw new Error(error.message || "Failed to load categories");
   }
 }
 
+// Get all areas/cuisines
 export async function getAreas() {
   try {
     const response = await fetch(`${MEALDB_BASE}/list.php?a=list`, {
-      next: { revalidate: 604800 }, // Cache for 7 days
+      next: { revalidate: 604800 }, // Cache for 1 week
     });
 
     if (!response.ok) {
@@ -57,7 +60,7 @@ export async function getAreas() {
     const data = await response.json();
     return {
       success: true,
-      recipe: data.meals || [],
+      areas: data.meals || [],
     };
   } catch (error) {
     console.error("Error fetching areas:", error);
@@ -65,9 +68,10 @@ export async function getAreas() {
   }
 }
 
-export async function getMealByCatagory(catagory) {
+// Get meals by category
+export async function getMealsByCategory(category) {
   try {
-    const response = await fetch(`${MEALDB_BASE}/filter.php?c=${catagory}`, {
+    const response = await fetch(`${MEALDB_BASE}/filter.php?c=${category}`, {
       next: { revalidate: 86400 }, // Cache for 24 hours
     });
 
@@ -78,15 +82,16 @@ export async function getMealByCatagory(catagory) {
     const data = await response.json();
     return {
       success: true,
-      recipe: data.meals || [],
-      catagory,
+      meals: data.meals || [],
+      category,
     };
   } catch (error) {
-    console.error("Error fetching meals by catagories:", error);
+    console.error("Error fetching meals by category:", error);
     throw new Error(error.message || "Failed to load meals");
   }
 }
 
+// Get meals by area
 export async function getMealsByArea(area) {
   try {
     const response = await fetch(`${MEALDB_BASE}/filter.php?a=${area}`, {
@@ -100,7 +105,7 @@ export async function getMealsByArea(area) {
     const data = await response.json();
     return {
       success: true,
-      recipe: data.meals || [],
+      meals: data.meals || [],
       area,
     };
   } catch (error) {
