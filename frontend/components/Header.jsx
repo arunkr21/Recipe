@@ -46,7 +46,7 @@ const Header = async () => {
             My Recipes
           </Link>
           <Link
-            href="/recipes"
+            href="/pantry"
             className="hover:text-orange-600 transition-colors flex gap-1.5 items-center"
           >
             <Refrigerator className="w-4 h-4" />
