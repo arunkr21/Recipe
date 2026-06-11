@@ -4,15 +4,19 @@ import arcjet, { shield, tokenBucket, detectBot } from "@arcjet/next";
 export const aj = arcjet({
   key: process.env.ARCJET_KEY,
   rules: [
-    // // Shield WAF - protect against common attacks
-    // shield({
-    //   mode: "LIVE", // Use "DRY_RUN" during development to test
-    // }),
-    // // Bot protection - allow search engines only
-    // detectBot({
-    //   mode: "LIVE",
-    //   allow: ["CATEGORY:SEARCH_ENGINE"],
-    // }),
+    // Shield WAF - protects against SQL injection, XSS, etc.
+    shield({
+      mode: "LIVE", // Change to "DRY_RUN" to test without blocking
+    }),
+
+    // Bot detection - allow search engines, block malicious bots
+    detectBot({
+      mode: "LIVE",
+      allow: [
+        "CATEGORY:SEARCH_ENGINE", // Google, Bing, etc.
+        "CATEGORY:PREVIEW", // Link previews (Slack, Discord, etc.)
+      ],
+    }),
   ],
 });
 
