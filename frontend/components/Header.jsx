@@ -14,6 +14,7 @@ import { checkUser } from "@/lib/checkUser";
 import PricingModel from "./PricingModel";
 import { Badge } from "./ui/badge";
 import Image from "next/image";
+import HowToCookModal from "./HowToCookModal";
 
 const Header = async () => {
   const user = await checkUser();
@@ -56,6 +57,7 @@ const Header = async () => {
         <div className="flex items-center space-x-4">
           <SignedIn>
             {/* How to cook */}
+            <HowToCookModal />
 
             {user && (
               <PricingModel subscriptionTier={user.subscriptionTier}>
