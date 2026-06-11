@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import useFetch from "@/hooks/use-fetch";
 import PricingModal from "@/components/PricingModal";
-import { getRecipesByPantryIngredients } from "@/actions/recipe.acions";
+import { getRecipesByPantryIngredients } from "@/actions/recipe.actions";
 import RecipeCard from "@/components/RecipeCard";
 
 export default function PantryRecipesPage() {
